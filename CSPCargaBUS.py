@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python
 #=*=coding:utf=8=*=
 import sys
@@ -78,16 +79,18 @@ def alumnoConflictivo(i,j):
 # Pertenece a ciclo 1
 def ciclo1(i,j):
     """Comprueba que los alumnos del ciclo 1 están sentados en los asientos que les corresponden"""
-    if i > 16:
+    if i >= 17:
         return False
-    return True
+    else:
+        return True
 
 # Pertenece a ciclo 2
 def ciclo2(i,j):
     """Comprueba que los alumnos del ciclo 1 están sentados en los asientos que les corresponden"""
     if i < 17:
         return False
-    return True
+    else:
+        return True
 
 # Pertenecen al mismo ciclo
 def mismociclo(i,j):
@@ -145,7 +148,7 @@ for i in students2:
                 problem.addConstraint(colocacionHermanosC1, (j[0], i[0]))
     else:
         #Pertenece al ciclo 1
-        if i[1] == 1:
+        if int(i[1]) == 1:
             problem.addConstraint(ciclo1, (i[0],i[0]))
         # Pertenece al ciclo 2
         else:
@@ -153,3 +156,80 @@ for i in students2:
 
 print(problem.getSolution())
 #print(problem.getSolutions())
+print(time.time()-start_time)
+solutions = problem.getSolutions()
+contador=0
+solutions2=len(solutions)
+#print(solutions2)
+solution = problem.getSolution()
+current_path = pathlib.Path().absolute()
+output_name = input[:-4]+".output"
+
+for i in students2:
+    add = i[2]+i[3]
+    i[0] += add
+
+lista = list(solution.keys())
+#print(students2)
+
+
+keys = list(solution)
+#print(keys)
+# numero de soluciones
+a = []
+for j in students2:
+    elem=j[0]
+    a.append(elem)
+#print(keys)
+#print(a)
+
+# Las claves con sus valores ordenados
+contador = 0
+for i in keys:
+    
+    elem = int(keys[contador])
+    e = elem-1
+    meter = a[e]
+    keys[contador] = meter
+    contador +=1
+#print(keys)
+
+# sustituir las claves
+keys2 = list(solution)
+x=0
+for k in keys2:
+    keys2[x] = keys[x]
+
+    x+=1
+y=0    
+for i in list(solution):
+    solution[keys2[y]] = solution.pop(i)
+
+    y += 1
+print(solution)
+buena = solution
+
+for elem in solutions:
+    # sustituir las claves
+    keys3 = list(elem)
+    x=0
+    for k in keys3:
+        keys3[x] = keys[x]
+
+        x+=1
+    y=0    
+    for i in list(elem):
+        elem[keys2[y]] = elem.pop(i)
+
+        y += 1
+#print(solutions)
+
+
+with open(output_name,"w") as file:
+    file.write('Numero de soluciones:')
+    file.write(str(solutions2))
+    file.write('\n')
+    #file.write(str(buena))
+    file.write('\n')
+    file.write(str(solutions))
+    file.close()
