@@ -1,4 +1,4 @@
-echo "huele a estufa"
+echo "parte1"
 
 ./python CSPCargaBUS.py ./CSP-tests/alumnos.txt
 ./python CSPCargaBUS.py ./CSP-tests/alumnos2.txt
