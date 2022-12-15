@@ -45,15 +45,15 @@ def heuristica(nodo, heur):
             if nodo.tipo1=="R" and nodo.tipo2 == "C":
                 coste2+=5
             elif nodo.tipo1=="R":
-                coste2+=3
-            elif nodo.tipo2=="C":
                 coste2+=2
+            elif nodo.tipo2=="C":
+                coste2+=3
             else:
                 coste2+=1
             return coste2
 
         if heur == '2':
-            coste2+=1
+            coste2=1
             return coste2
         
         else:
@@ -238,7 +238,7 @@ def Astar(lista, heur):
                         nodo_nuevo.h = coste - nodo_nuevo.h
                         
                         # lo que tarda el colfictivo en subir
-                        nodo_nuevo.coste_individual = 2 * nodo_actual.coste_individual
+                        nodo_nuevo.coste_individual = 3 * nodo_actual.coste_individual
                         nodo_nuevo.g += nodo_actual.coste_individual
                         nodo_nuevo.f = nodo_nuevo.g + nodo_nuevo.h
                         openList.append(nodo_nuevo)
@@ -285,7 +285,7 @@ def Astar(lista, heur):
                             if asiento < i[3]:
                                 contador += 1
                         # tarda 2 pq el anterior era conflictivo y duplica su tiempo
-                        nodo_nuevo.coste_individual = 2 * (2 ** contador)
+                        nodo_nuevo.coste_individual = 3 * (2 ** contador)
                         nodo_nuevo.g += nodo_nuevo.coste_individual + nodo_actual.coste_individual
                         nodo_nuevo.f = nodo_nuevo.g + nodo_nuevo.h
                         openList.append(nodo_nuevo)
@@ -315,7 +315,7 @@ def Astar(lista, heur):
                         for asiento in asientos_conflictivos:
                             if asiento < i[3]:
                                 contador += 1
-                        nodo_nuevo.coste_individual = 2 * (2 ** contador)
+                        nodo_nuevo.coste_individual = 3 * (2 ** contador)
                         nodo_nuevo.g += nodo_nuevo.coste_individual
                         nodo_nuevo.f = nodo_nuevo.g + nodo_nuevo.h
                         openList.append(nodo_nuevo)
@@ -337,7 +337,7 @@ def Astar(lista, heur):
                         if asiento < i[3]:
                             contador += 1
                     # para la gente conflictiva delante te duplica el tiempo
-                    nodo_nuevo.coste_individual = 3 * (2 ** contador)
+                    nodo_nuevo.coste_individual = 2 * (2 ** contador)
                     nodo_nuevo.g += nodo_nuevo.coste_individual
                     nodo_nuevo.f = nodo_nuevo.g + nodo_nuevo.h
                     openList.append(nodo_nuevo)
@@ -371,7 +371,7 @@ def Astar(lista, heur):
                     for asiento in asientos_conflictivos:
                         if asiento < i[3]:
                             contador += 1
-                    nodo_nuevo.coste_individual = 3 * (2 ** contador)
+                    nodo_nuevo.coste_individual = 2 * (2 ** contador)
                     nodo_nuevo.g += nodo_nuevo.coste_individual + nodo_actual.coste_individual
                     nodo_nuevo.f = nodo_nuevo.g + nodo_nuevo.h
                     openList.append(nodo_nuevo)
