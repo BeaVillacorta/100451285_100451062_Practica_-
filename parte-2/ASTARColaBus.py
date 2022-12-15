@@ -45,9 +45,9 @@ def heuristica(nodo, heur):
         if nodo.tipo1 == "R" and nodo.tipo2 == "C":
             coste2 += 5
         elif nodo.tipo1 == "R":
-            coste2 += 3
-        elif nodo.tipo2 == "C":
             coste2 += 2
+        elif nodo.tipo2 == "C":
+            coste2 += 3
         else:
             coste2 += 1
         return coste2
@@ -68,9 +68,9 @@ def Astar(lista, heur):
             if i[2] == 'R' and i[1] == 'C':
                 coste += 5
             elif i[1] == 'C':
-                coste += 2
-            elif i[2] == 'R':
                 coste += 3
+            elif i[2] == 'R':
+                coste += 2
             else:
                 coste += 1
     elif heur == 2:
