@@ -51,13 +51,9 @@ def heuristica(nodo, heur):
         else:
             coste2 += 1
         return coste2
-
-    if heur == 2:
-        coste2 = 0
-        if nodo.tipo2 == "C":
-            coste2 += 5
-        else:
-            coste2 += 2
+    #heuristica menos informada
+    elif heur == 2:
+        coste2 = -1
         return coste2
     else:
         print("Error: El nombre de la heuristica debe ser 1 o 2.")
@@ -67,14 +63,18 @@ def heuristica(nodo, heur):
 def Astar(lista, heur):
     """Da coste total tardan todos los alumnos en montarse al autobús"""
     coste = 0
-    for i in lista:
-        if i[2] == 'R' and i[1] == 'C':
-            coste += 5
-        elif i[1] == 'C':
-            coste += 2
-        elif i[2] == 'R':
-            coste += 3
-        else:
+    if heur==1:
+        for i in lista:
+            if i[2] == 'R' and i[1] == 'C':
+                coste += 5
+            elif i[1] == 'C':
+                coste += 2
+            elif i[2] == 'R':
+                coste += 3
+            else:
+                coste += 1
+    elif heur == 2:
+        for i in lista:
             coste += 1
 
     # Creacion de estado inicial PONER QUE h Y f SEAN DE LA HEURISTICA
