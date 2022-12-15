@@ -98,7 +98,6 @@ def Astar(lista, heur):
     # Creacion de estado inicial PONER QUE h Y f SEAN DE LA HEURISTICA
     # nodo con el que se empieza en la lista abierta
     start = Node("start", prev_node, 0, 0, 0, 1, "X", "X", None)
-    contador_nodos += 1
     start.h = heuristica(start, heur)
     # start.h = 0 ???
     start.f = start.h + start.g
@@ -196,7 +195,7 @@ def Astar(lista, heur):
         print(obligado)
         print(nodo_actual.nombre)
 
-        contador_nodos += 1
+
         print("coste: " + str(coste))
 
         # Si el nodo padre tiene movilidad reducida y es o no es conflictivo
@@ -228,6 +227,7 @@ def Astar(lista, heur):
                     nodo_nuevo.f = nodo_nuevo.g + nodo_nuevo.h
                     openList.append(nodo_nuevo)
                     # la g no cambia pq suben dos a la dos a la vez.
+                    contador_nodos += 1
 
                 elif i[2] == 'X' and i[1] == 'C':
                     nodo_nuevo = Node(i[0], nodo_actual, nodo_actual.g, None, None, None, "X", "C", i[3])
@@ -240,7 +240,7 @@ def Astar(lista, heur):
                     nodo_nuevo.g += nodo_actual.coste_individual
                     nodo_nuevo.f = nodo_nuevo.g + nodo_nuevo.h
                     openList.append(nodo_nuevo)
-
+                    contador_nodos += 1
 
         # Si el nodo padre es conflictivo
         elif nodo_actual.tipo2 == 'C':
@@ -269,7 +269,7 @@ def Astar(lista, heur):
                     # se añade
                     nodo_nuevo.f = nodo_nuevo.g + nodo_nuevo.h
                     openList.append(nodo_nuevo)
-
+                    contador_nodos += 1
                 # un conlfictivo detrás de otro conflictivo
                 elif i[2] == 'X' and i[1] == 'C':
                     nodo_nuevo = Node(i[0], nodo_actual, nodo_actual.g, None, None, None, "X", "C", i[3])
@@ -286,7 +286,7 @@ def Astar(lista, heur):
                     nodo_nuevo.g += nodo_nuevo.coste_individual + nodo_actual.coste_individual
                     nodo_nuevo.f = nodo_nuevo.g + nodo_nuevo.h
                     openList.append(nodo_nuevo)
-
+                    contador_nodos += 1
                 # movilidad reducida y conflictivo
                 elif i[2] == 'R' and i[1] == 'C':
                     nodo_nuevo = Node(i[0], nodo_actual, nodo_actual.g, None, None, None, "R", "C", i[3])
@@ -301,6 +301,7 @@ def Astar(lista, heur):
                     nodo_nuevo.g += nodo_nuevo.coste_individual + nodo_actual.coste_individual
                     nodo_nuevo.f = nodo_nuevo.g + nodo_nuevo.h
                     openList.append(nodo_nuevo)
+                    contador_nodos += 1
                 else:
                     nodo_nuevo = Node(i[0], nodo_actual, nodo_actual.g, None, None, None, "X", "X", i[3])
                     # coste2 = coste- 1
@@ -314,7 +315,7 @@ def Astar(lista, heur):
                     nodo_nuevo.g += nodo_nuevo.coste_individual
                     nodo_nuevo.f = nodo_nuevo.g + nodo_nuevo.h
                     openList.append(nodo_nuevo)
-
+                    contador_nodos += 1
 
         # Si el nodo padre es un alumno normal 'XX'
         else:
@@ -334,7 +335,7 @@ def Astar(lista, heur):
                     nodo_nuevo.g += nodo_nuevo.coste_individual
                     nodo_nuevo.f = nodo_nuevo.g + nodo_nuevo.h
                     openList.append(nodo_nuevo)
-
+                    contador_nodos += 1
                 # siguiente no tiene movilidad reducida y es conflictivo
                 elif i[2] == 'X' and i[1] == 'C':
                     nodo_nuevo = Node(i[0], nodo_actual, nodo_actual.g, None, None, None, "X", "C", i[3])
@@ -349,7 +350,7 @@ def Astar(lista, heur):
                     nodo_nuevo.g += nodo_nuevo.coste_individual + nodo_actual.coste_individual
                     nodo_nuevo.f = nodo_nuevo.g + nodo_nuevo.h
                     openList.append(nodo_nuevo)
-
+                    contador_nodos += 1
 
                 # siguiente tiene movilidad reducida y es conflictivo
                 elif i[2] == 'R' and i[1] == 'C':
@@ -366,6 +367,7 @@ def Astar(lista, heur):
                     nodo_nuevo.g += nodo_nuevo.coste_individual + nodo_actual.coste_individual
                     nodo_nuevo.f = nodo_nuevo.g + nodo_nuevo.h
                     openList.append(nodo_nuevo)
+                    contador_nodos += 1
                 else:
                     nodo_nuevo = Node(i[0], nodo_actual, nodo_actual.g, None, None, None, "X", "X", i[3])
                     # coste2=coste - 1
@@ -379,7 +381,7 @@ def Astar(lista, heur):
                     nodo_nuevo.g += nodo_nuevo.coste_individual
                     nodo_nuevo.f = nodo_nuevo.g + nodo_nuevo.h
                     openList.append(nodo_nuevo)
-
+                    contador_nodos += 1
         # Ordena la open list de menor a mayor f
         openList = sorted(openList, key=lambda nodo: nodo.f)
         prev_node = nodo_actual
