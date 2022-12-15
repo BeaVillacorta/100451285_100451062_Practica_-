@@ -53,11 +53,7 @@ def heuristica(nodo, heur):
             return coste2
 
         if heur == '2':
-            coste2=0
-            if nodo.tipo2=="C":
-                coste2+=5
-            else:
-                coste2+=2
+            coste2+=1
             return coste2
         
         else:
