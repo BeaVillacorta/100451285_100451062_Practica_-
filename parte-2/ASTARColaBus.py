@@ -126,14 +126,15 @@ def Astar(lista, heur):
             nombres = nombres [1:]
             print(nombres)
             
-                
-            fichero_salida = open("hola"+".stat", "w")
+            
+            guion = '-'    
+            fichero_salida = open(input[:-5]+guion+heur+".stat", "w")
             estadistica = "Tiempo Total: " + str((time.time() - start_time)) + "\nCoste Total: " + str(
                 nodo_actual.f) + "\nLongitud del plan: " + str(len(nombres)) + "\n" + "Nodos expandidos: " + str(contador_nodos)
             fichero_salida.write(estadistica)
-            fichero_salida.close()
+            fichero_salida.close()     
             
-            fichero_solucion = open("solucion"+".output", "w")
+            fichero_solucion = open(input[:-5]+guion+heur+".output", "w")
             datos_entrada = open(input,'r')  
             escribir_mensaje = "INICIAL:" + str(datos_entrada.read()) +"\nFINAL:" + str(nombres)
             fichero_solucion.write(escribir_mensaje)

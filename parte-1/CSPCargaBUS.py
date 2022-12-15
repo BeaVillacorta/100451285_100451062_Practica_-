@@ -235,5 +235,6 @@ with open(output_name, "w") as file:
     file.write('\n')
     # file.write(str(buena))
     file.write('\n')
-    file.write(str(solutions))
+    file.write(str(solution))
+    #file.write(str(solutions))
     file.close()
